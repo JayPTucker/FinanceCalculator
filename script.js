@@ -1,26 +1,26 @@
+function isValidInp(paycheck, element) {
+    if (paycheck === 0) {
+        document.getElementById(element).innerHTML = "Error, Please type a proper integer above";
+        return false;
+    }
+    else {
+        document.getElementById(element).innerHTML = "";
+        return true;
+    }
+}
 
-function tester() {
+
+function calculateIncome() {
     // First Paycheck Avg Calculator
     let paycheck1 = Number(document.getElementById("paycheck-1").value)
     let paycheck2 = Number(document.getElementById("paycheck-2").value)
 
+    paycheck1Valid = isValidInp(paycheck1, "error-Msg-1")
+    paycheck2Valid = isValidInp(paycheck2, "error-Msg-2")
 
-    // The code below is designed to make sure there is a proper number (integer) entered into the input box
-    if (paycheck1 === 0) {
-        console.log("This is NOT a number (1)")
-        // alert("The values entered below are not valid numbers, please try again");
-        document.getElementById("error-Msg-1").innerHTML = "Error, Please type a proper integer above";
-    } else if (paycheck2 === 0) {
-        console.log("This is NOT a number (2)")
-        document.getElementById("error-Msg-2").innerHTML = "Error, Please type a proper integer above";
-    } else {
-        document.getElementById("error-Msg-1").innerHTML = "";
-        document.getElementById("error-Msg-2").innerHTML = "";
+    if (paycheck1Valid && paycheck2Valid) {
         console.log("This is a number");
     }
-
-    // Test Console Log to make sure Math Works
-    // console.log(paycheck1 + paycheck2)
 
     let monthlyIncome = paycheck1 + paycheck2;
 
