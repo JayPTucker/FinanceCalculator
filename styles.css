@@ -1,0 +1,8 @@
+p {
+    padding: 0;
+    margin: 0;
+}
+
+#error-Msg-1, #error-Msg-2 {
+    color: red;
+}
