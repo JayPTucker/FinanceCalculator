@@ -1,4 +1,4 @@
-function isValidInp(paycheck, element) {
+function isValidInput(paycheck, element) {
     if (paycheck === 0) {
         document.getElementById(element).innerHTML = "Error, Please type a proper integer above";
         return false;
@@ -11,20 +11,26 @@ function isValidInp(paycheck, element) {
 
 
 function calculateIncome() {
-    // First Paycheck Avg Calculator
+    // Our Variables
+
+    // Setting paychecks 1/2 to turn from a string into a Number
     let paycheck1 = Number(document.getElementById("paycheck-1").value)
     let paycheck2 = Number(document.getElementById("paycheck-2").value)
-
-    paycheck1Valid = isValidInp(paycheck1, "error-Msg-1")
-    paycheck2Valid = isValidInp(paycheck2, "error-Msg-2")
-
-    if (paycheck1Valid && paycheck2Valid) {
-        // console.log("This is a number");
-    }
-
+    // Setting our Monthly income to the sum of our paychecks.
     let monthlyIncome = paycheck1 + paycheck2;
 
-    // Uses our monthlyIncome P tag by the ID and prints our Variable onto the page
-    document.getElementById("monthlyIncomeText").innerHTML = "Monthly Income:"
-    document.getElementById("monthlyIncome").innerHTML = "$" + monthlyIncome;
+    // Checks using the function above to see if our paychecks are valid 
+    paycheck1Valid = isValidInput(paycheck1, "error-Msg-1")
+    paycheck2Valid = isValidInput(paycheck2, "error-Msg-2")
+
+    // Verification for result
+    if (paycheck1Valid === true && paycheck2Valid === true) {
+        document.getElementById("monthlyIncomeText").innerHTML = "Monthly Income:";
+        document.getElementById("monthlyIncome").innerHTML = "$" + monthlyIncome;    
+    } else {
+        document.getElementById("monthlyIncomeText").innerHTML = "Unable to generate monthly income";
+        document.getElementById("monthlyIncome").innerHTML = "";    
+    }
+
+    // // Uses our monthlyIncome P tag by the ID and prints our Variable onto the page
 };
