@@ -19,11 +19,12 @@ function calculateIncome() {
     paycheck2Valid = isValidInp(paycheck2, "error-Msg-2")
 
     if (paycheck1Valid && paycheck2Valid) {
-        console.log("This is a number");
+        // console.log("This is a number");
     }
 
     let monthlyIncome = paycheck1 + paycheck2;
 
     // Uses our monthlyIncome P tag by the ID and prints our Variable onto the page
-    document.getElementById("monthlyIncome").innerHTML = monthlyIncome;
+    document.getElementById("monthlyIncomeText").innerHTML = "Monthly Income:"
+    document.getElementById("monthlyIncome").innerHTML = "$" + monthlyIncome;
 };
