@@ -12,25 +12,29 @@
     <title>My Finances</title>
 </head>
 <body>
-    <container>
-        <row class="col-md-12">
+    <container class="container-fluid text-center justify-content-center">
+        <row class="row justify-content-center">
+            <div class="col-md-10">
 
-            <h1>Bi-Weekly Annual Income Calculator</h1>
+                
 
-            <form>
-                <label for="paycheck-1">Paycheck 1</label><br>
-                $<input type="text" id="paycheck-1" placeholder="0.00" name="paycheck-1"><br>
-                <p id="error-Msg-1"></p>
-                <label for="paycheck-2">Paycheck 2</label><br>
-                $<input type="text" id="paycheck-2" placeholder="0.00" name="paycheck-2"><br><br>
-                <p id="error-Msg-2"></p>
-                <button type="button" onClick="calculateIncome()">Calculate</button>
-            </form>
-            <div>
-                <h5>Monthly Income:</h5>
-                <p id="monthlyIncome"></p>    
+                <h1>Bi-Weekly Annual Income Calculator</h1>
+
+                <form>
+                    <label for="paycheck-1">Paycheck 1</label><br>
+                    $<input type="text" id="paycheck-1" placeholder="0.00" name="paycheck-1"><br>
+                    <p id="error-Msg-1"></p>
+                    <label for="paycheck-2">Paycheck 2</label><br>
+                    $<input type="text" id="paycheck-2" placeholder="0.00" name="paycheck-2"><br><br>
+                    <p id="error-Msg-2"></p>
+                    <button type="button" onClick="calculateIncome()">Calculate</button>
+                </form>
+                <div>
+                    <h5>Monthly Income:</h5>
+                    <p id="monthlyIncome"></p>    
+                </div>
+
             </div>
-
         </row>
     </container>
 
