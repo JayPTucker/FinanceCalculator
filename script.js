@@ -77,3 +77,45 @@ function CalculateWeeklyIncome() {
     localStorage.setItem("weeklyIncome", weeklyIncome)
     return weeklyIncome;
 }
+
+function addElement() {
+
+    var inputValue = document.getElementById("addInput").value
+
+    
+    if (inputValue == "") {
+        console.log("Nothing here!")
+        alert("Please enter a valid input value")
+    } else {
+        // creates a new input element from the Add button
+        var input = document.createElement("input")
+        input.setAttribute("type", "text")
+        input.setAttribute("placeholder", "$0.00");
+        input.setAttribute("id", "AdditionsInputBox")
+        // Create text that has inputValue set
+        var text = document.createElement("p")
+        text.append(inputValue)
+
+        document.body.appendChild(text) + ":";
+        document.body.appendChild(input)
+        
+        // Clears our input field
+        document.getElementById("addInput").value = ""
+    }
+}
+
+function CalculateExtraExpenses() {
+    // Function that creates a input field for each expense. 
+    var inputBox = document.getElementById("AdditionsInputBox")
+    var allInputs = document.querySelectorAll('[id="AdditionsInputBox"]')
+
+    // Logs the amount of inputs we have
+    console.log(allInputs.length)
+    // Logs the value of input 0
+    console.log(allInputs[0].value)
+
+    // For loop that will console log every allInputs values
+    for (var i = 0; i < allInputs.length - 1; i++) {
+        console.log(allInputs[i].value)
+    }
+};
