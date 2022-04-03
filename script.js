@@ -23,8 +23,6 @@ function calculateIncome() {
 
     // Verification for result
     if (paycheck1Valid === true && paycheck2Valid === true) {
-        document.getElementById("monthlyIncomeText").innerHTML = "New Monthly Income:";
-        document.getElementById("monthlyIncome").innerHTML = "$" + monthlyIncome + "/mo";  
         // Add previous monthly income to local storage
         // Use toFixed to make the decimal end on the second integer
         // paycheck1
@@ -33,8 +31,9 @@ function calculateIncome() {
         localStorage.setItem("paycheck-2", (paycheck2).toFixed(2));
         // monthlyIncome
         localStorage.setItem("monthlyIncome", monthlyIncome.toFixed(2));
-        
-        CalculateWeeklyIncome();
+
+        // Gathers data from LocalStorage and posts it onto the page
+        onLoad();
         
     } else {
         alert("Error, unable to generate monthly income");
@@ -58,7 +57,7 @@ function onLoad() {
         var weeklyIncome = CalculateWeeklyIncome()
         console.log(weeklyIncome)
 
-        document.getElementById("monthlyIncomeText").innerHTML = "Last monthly income:"
+        document.getElementById("monthlyIncomeText").innerHTML = "Current Monthly income:"
 
         document.getElementById("monthlyIncome").innerHTML = (
             "Paycheck 1: $" + localStorage.getItem("paycheck-1") + "<br>" +
@@ -69,10 +68,12 @@ function onLoad() {
     };
 };
 
+// Loads our onLoad function to post our data immediately on the page.
 onLoad();
 
 function CalculateWeeklyIncome() {
-    var weeklyIncome = (((localStorage.getItem("paycheck-1") / 2) + (localStorage.getItem("paycheck-2") / 2))/2).toFixed(2)
+    var weeklyIncome = (((localStorage.getItem("paycheck-1") / 2) + 
+                            (localStorage.getItem("paycheck-2") / 2))/2).toFixed(2)
     localStorage.setItem("weeklyIncome", weeklyIncome)
     return weeklyIncome;
 }
