@@ -1,10 +1,3 @@
-    // Our Variables
-// Setting paychecks 1/2 to turn from a string into a Number
-let paycheck1 = Number(document.getElementById("paycheck-1").value)
-let paycheck2 = Number(document.getElementById("paycheck-2").value)
-// Setting our Monthly income to the sum of our paychecks.
-let monthlyIncome = paycheck1 + paycheck2;
-
 function isValidInput(paycheck, element) {
     if (paycheck === 0) {
         document.getElementById(element).innerHTML = "Error, Please type a proper integer above";
@@ -17,6 +10,12 @@ function isValidInput(paycheck, element) {
 }
 
 function calculateIncome() {
+    // Our Variables
+    // Setting paychecks 1/2 to turn from a string into a Number
+    var paycheck1 = Number(document.getElementById("paycheck-1").value)
+    var paycheck2 = Number(document.getElementById("paycheck-2").value)
+    // Setting our Monthly income to the sum of our paychecks.
+    var monthlyIncome = (paycheck1 + paycheck2)
 
     // Checks using the function above to see if our paychecks are valid 
     paycheck1Valid = isValidInput(paycheck1, "error-Msg-1")
@@ -27,18 +26,23 @@ function calculateIncome() {
         document.getElementById("monthlyIncomeText").innerHTML = "New Monthly Income:";
         document.getElementById("monthlyIncome").innerHTML = "$" + monthlyIncome + "/mo";  
         // Add previous monthly income to local storage
+        // Use toFixed to make the decimal end on the second integer
         // paycheck1
-        localStorage.setItem("paycheck-1", paycheck1);
+        localStorage.setItem("paycheck-1", (paycheck1).toFixed(2));
         // paycheck2
-        localStorage.setItem("paycheck-2", paycheck2);
+        localStorage.setItem("paycheck-2", (paycheck2).toFixed(2));
         // monthlyIncome
-        localStorage.setItem("monthly-income", monthlyIncome);
+        localStorage.setItem("monthlyIncome", monthlyIncome.toFixed(2));
+        
+        CalculateWeeklyIncome();
         
     } else {
         alert("Error, unable to generate monthly income");
         document.getElementById("monthlyIncome").innerHTML = "";    
         onLoad()
     }
+
+    return paycheck1;
 
 };
 
@@ -49,24 +53,26 @@ function onLoad() {
         console.log("No previous data found")
         document.getElementById("monthlyIncome").innerHTML = "";    
     } else {
+
+        // Return functionality
+        var weeklyIncome = CalculateWeeklyIncome()
+        console.log(weeklyIncome)
+
         document.getElementById("monthlyIncomeText").innerHTML = "Last monthly income:"
 
         document.getElementById("monthlyIncome").innerHTML = (
-        "Paycheck 1: $" + localStorage.getItem("paycheck-1") + "<br>" +
-        "Paycheck 2: $" + localStorage.getItem("paycheck-2") + "<br>" +
-        "Last monthly income: $" + localStorage.getItem("monthly-income") + "/mo"
+            "Paycheck 1: $" + localStorage.getItem("paycheck-1") + "<br>" +
+            "Paycheck 2: $" + localStorage.getItem("paycheck-2") + "<br>" +
+            "Last weekly income: $" + localStorage.getItem("weeklyIncome") + "<br>" +
+            "Last monthly income: $" + localStorage.getItem("monthlyIncome") + "/mo"
         );
-    }
-    
-}
+    };
+};
 
 onLoad();
 
 function CalculateWeeklyIncome() {
-    var weeklyIncome = ((localStorage.getItem("paycheck-1") / 2) + (localStorage.getItem("paycheck-2") / 2))/2
-    console.log(weeklyIncome)
+    var weeklyIncome = (((localStorage.getItem("paycheck-1") / 2) + (localStorage.getItem("paycheck-2") / 2))/2).toFixed(2)
+    localStorage.setItem("weeklyIncome", weeklyIncome)
     return weeklyIncome;
 }
-
-
-CalculateWeeklyIncome();
