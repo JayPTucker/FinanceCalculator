@@ -1,3 +1,10 @@
+    // Our Variables
+// Setting paychecks 1/2 to turn from a string into a Number
+let paycheck1 = Number(document.getElementById("paycheck-1").value)
+let paycheck2 = Number(document.getElementById("paycheck-2").value)
+// Setting our Monthly income to the sum of our paychecks.
+let monthlyIncome = paycheck1 + paycheck2;
+
 function isValidInput(paycheck, element) {
     if (paycheck === 0) {
         document.getElementById(element).innerHTML = "Error, Please type a proper integer above";
@@ -10,14 +17,6 @@ function isValidInput(paycheck, element) {
 }
 
 function calculateIncome() {
-    // Our Variables
-
-    // Setting paychecks 1/2 to turn from a string into a Number
-    let paycheck1 = Number(document.getElementById("paycheck-1").value)
-    let paycheck2 = Number(document.getElementById("paycheck-2").value)
-    // Setting our Monthly income to the sum of our paychecks.
-    let monthlyIncome = paycheck1 + paycheck2;
-
 
     // Checks using the function above to see if our paychecks are valid 
     paycheck1Valid = isValidInput(paycheck1, "error-Msg-1")
@@ -46,13 +45,28 @@ function calculateIncome() {
 // Create a function that loads our last monthly income from local storage
 function onLoad() {
 
-    document.getElementById("monthlyIncomeText").innerHTML = "Last monthly income:"
+    if (localStorage.getItem("paycheck-1") === null) {
+        console.log("No previous data found")
+        document.getElementById("monthlyIncome").innerHTML = "";    
+    } else {
+        document.getElementById("monthlyIncomeText").innerHTML = "Last monthly income:"
 
-    document.getElementById("monthlyIncome").innerHTML = (
+        document.getElementById("monthlyIncome").innerHTML = (
         "Paycheck 1: $" + localStorage.getItem("paycheck-1") + "<br>" +
         "Paycheck 2: $" + localStorage.getItem("paycheck-2") + "<br>" +
         "Last monthly income: $" + localStorage.getItem("monthly-income") + "/mo"
         );
+    }
+    
 }
 
 onLoad();
+
+function CalculateWeeklyIncome() {
+    var weeklyIncome = ((localStorage.getItem("paycheck-1") / 2) + (localStorage.getItem("paycheck-2") / 2))/2
+    console.log(weeklyIncome)
+    return weeklyIncome;
+}
+
+
+CalculateWeeklyIncome();
