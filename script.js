@@ -12,8 +12,8 @@ function isValidInput(paycheck, element) {
 function calculateIncome() {
     // Our Variables
     // Setting paychecks 1/2 to turn from a string into a Number
-    var paycheck1 = Number(document.getElementById("paycheck-1").value)
-    var paycheck2 = Number(document.getElementById("paycheck-2").value)
+    var paycheck1 = parseInt(document.getElementById("paycheck-1").value)
+    var paycheck2 = parseInt(document.getElementById("paycheck-2").value)
     // Setting our Monthly income to the sum of our paychecks.
     var monthlyIncome = (paycheck1 + paycheck2)
 
@@ -55,9 +55,9 @@ function onLoad() {
 
         // Return functionality
         var weeklyIncome = CalculateWeeklyIncome()
-        console.log(weeklyIncome)
+        console.log("Weekly income " + weeklyIncome)
 
-        document.getElementById("monthlyIncomeText").innerHTML = "Current Monthly income:"
+        document.getElementById("monthlyIncomeText").innerHTML = "Current Monthly income: <br><p>Taxes not included</p>"
 
         document.getElementById("monthlyIncome").innerHTML = (
             "Paycheck 1: $" + localStorage.getItem("paycheck-1") + "<br>" +
@@ -101,21 +101,28 @@ function addElement() {
         
         // Clears our input field
         document.getElementById("addInput").value = ""
+
+
     }
 }
 
+var additionsArray = [];
+
 function CalculateExtraExpenses() {
-    // Function that creates a input field for each expense. 
-    var inputBox = document.getElementById("AdditionsInputBox")
+    // Function that creates a input field for each expense.
     var allInputs = document.querySelectorAll('[id="AdditionsInputBox"]')
 
-    // Logs the amount of inputs we have
-    console.log(allInputs.length)
-    // Logs the value of input 0
-    console.log(allInputs[0].value)
+    var totalExpenses = 0;
 
-    // For loop that will console log every allInputs values
-    for (var i = 0; i < allInputs.length - 1; i++) {
-        console.log(allInputs[i].value)
-    }
+    allInputs.forEach(input => {
+        console.log(input.value)
+        // Add our inputs to an array
+        additionsArray.push(input.value)
+
+        localStorage.setItem('additionsArray', additionsArray);
+
+        totalExpenses += parseInt(input.value)
+
+        console.log(totalExpenses)
+    })
 };
