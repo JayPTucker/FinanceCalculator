@@ -80,49 +80,65 @@ function CalculateWeeklyIncome() {
 
 function addElement() {
 
-    var inputValue = document.getElementById("addInput").value
+    let inputValue = prompt("What is this expense called?");
 
-    
-    if (inputValue == "") {
-        console.log("Nothing here!")
-        alert("Please enter a valid input value")
-    } else {
-        // creates a new input element from the Add button
+    if (inputValue != null) {
+        console.log(inputValue)
+
+        // First we will apply it to the page WITH a delete button
         var input = document.createElement("input")
         input.setAttribute("type", "text")
-        input.setAttribute("placeholder", "$0.00");
+        input.setAttribute("placeholder", inputValue)
         input.setAttribute("id", "AdditionsInputBox")
-        // Create text that has inputValue set
-        var text = document.createElement("p")
-        text.append(inputValue)
 
-        document.body.appendChild(text) + ":";
-        document.body.appendChild(input)
-        
-        // Clears our input field
-        document.getElementById("addInput").value = ""
+        document.body.appendChild(input);
 
+        // Adds Save Button
+        var saveElementButton = document.createElement("button")
+        saveElementButton.setAttribute("type", "button")
+        saveElementButton.setAttribute("id", "saveBtn")
 
+        // Adds Delete Button
+        var removeElementButton = document.createElement("button")
+        removeElementButton.setAttribute("type", "button")
+        removeElementButton.setAttribute("id", "deleteBtn")
+
+        // Appends our Save and Delete buttons to the page.
+        document.body.appendChild(saveElementButton)
+        document.body.appendChild(removeElementButton)
+        document.getElementById("saveBtn").innerHTML = "Save"
+        document.getElementById("deleteBtn").innerHTML = "Delete"
+
+        // Then make sure the delete button works properly and deletes from local storage
+    } else {
+        alert("Please enter a proper title for this expense.")
     }
+    
 }
 
-var additionsArray = [];
+function removeElement() {
 
-function CalculateExtraExpenses() {
-    // Function that creates a input field for each expense.
-    var allInputs = document.querySelectorAll('[id="AdditionsInputBox"]')
+}
 
-    var totalExpenses = 0;
+function saveElement() {
 
-    allInputs.forEach(input => {
-        console.log(input.value)
-        // Add our inputs to an array
-        additionsArray.push(input.value)
+}
 
-        localStorage.setItem('additionsArray', additionsArray);
+// function CalculateExtraExpenses() {
+//     // Function that creates a input field for each expense.
+//     var allInputs = document.querySelectorAll('[id="AdditionsInputBox"]')
 
-        totalExpenses += parseInt(input.value)
+//     var totalExpenses = 0;
 
-        console.log(totalExpenses)
-    })
-};
+//     allInputs.forEach(input => {
+//         console.log(input.value)
+//         // Add our inputs to an array
+//         additionsArray.push(input.value)
+
+//         localStorage.setItem('additionsArray', additionsArray);
+
+//         totalExpenses += parseInt(input.value)
+
+//         console.log(totalExpenses)
+//     })
+// };
